@@ -1,4 +1,7 @@
-﻿using MediatR;
+﻿using Application.Functions.Product.Commands.AddProduct;
+using Domain.Entites;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,7 +19,6 @@ namespace Application
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
-
 
             return services;
         }

@@ -1,4 +1,5 @@
-﻿using Application.Functions.Product.Queries.GetAllProducts;
+﻿using Application.Functions.Product.Commands.AddProduct;
+using Application.Functions.Product.Queries.GetAllProducts;
 using AutoMapper;
 using Domain.Entites;
 using System;
@@ -17,6 +18,9 @@ namespace Application.AutoMapper
             //Product Queries
             CreateMap<Product, GetAllProductsDto>()
                 .ForMember(dest => dest.NameCategory, opt => opt.MapFrom(src => src.ProductCategory.Name));
+
+            //Product Commands
+            CreateMap<Product, AddProductCommand>().ReverseMap();
         }
     }
 }

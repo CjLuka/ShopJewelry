@@ -18,6 +18,13 @@ namespace Persistance.Repository
             _shopDbContext = shopDbContext;
         }
 
+        public async Task<T> AddAsync(T entity)
+        {
+            await _shopDbContext.Set<T>().AddAsync(entity);
+            await _shopDbContext.SaveChangesAsync();
+            return entity;
+        }
+
         public async Task<List<T>?> GetAll()
         {
             return await _shopDbContext.Set<T>()
