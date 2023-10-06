@@ -1,4 +1,5 @@
-﻿using Application.Functions.Product.Commands.AddProduct;
+﻿using Application.Functions.Auth.Commands.SignUp;
+using Application.Functions.Product.Commands.AddProduct;
 using Application.Functions.Product.Queries.GetAllProducts;
 using AutoMapper;
 using Domain.Entites;
@@ -20,7 +21,10 @@ namespace Application.AutoMapper
                 .ForMember(dest => dest.NameCategory, opt => opt.MapFrom(src => src.ProductCategory.Name));
 
             //Product Commands
-            CreateMap<Product, AddProductCommand>().ReverseMap();
+            CreateMap<AddProductCommand, Product>();
+
+            //User Commands
+            CreateMap<User, SignUpCommand>().ReverseMap();
         }
     }
 }

@@ -25,6 +25,12 @@ namespace Persistance.Repository
             return entity;
         }
 
+        public async Task DeleteAsync(T entity)
+        {
+            _shopDbContext.Set<T>().Remove(entity);
+            await _shopDbContext.SaveChangesAsync();
+        }
+
         public async Task<List<T>?> GetAll()
         {
             return await _shopDbContext.Set<T>()
@@ -41,6 +47,12 @@ namespace Persistance.Repository
         {
             return await _shopDbContext.Set<T>()
                 .FindAsync(id);
+        }
+
+        public async Task UpdateAsync(T entity)
+        {
+            _shopDbContext.Set<T>().Update(entity);
+            await _shopDbContext.SaveChangesAsync();
         }
     }
 }

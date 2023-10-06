@@ -20,6 +20,8 @@ namespace Persistance
                 options.UseSqlServer(configuration.GetConnectionString("ShopConnectionString")));
 
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped(typeof(IAsyncRepository<>), typeof(AsyncRepository<>));
 
             return services;

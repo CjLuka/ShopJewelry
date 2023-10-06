@@ -2,6 +2,7 @@
 using Application.Functions.Product.Queries.GetAllProducts;
 using Application.Responses;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,17 +17,29 @@ namespace Api.Controllers
         {
             _mediator = mediator;
         }
+
+        [Authorize]
         [HttpGet]
-        [Route("allProducts")]
+        [Route("AllProducts")]
         public async Task<BaseResponse<List<GetAllProductsDto>>> GetAllProducts()
         {
             return await _mediator.Send(new GetAllProductsQuery());
         }
+
+        [Authorize(Roles ="Admin")]
         [HttpPost]
-        [Route("addProduct")]
+        [Route("Add")]
         public async Task<BaseResponse> AddProduct([FromBody] AddProductCommand request)
         {
             return await _mediator.Send(request);
         }
+
+        [HttpDelete]
+        [Route("Delete/{id}")]
+        public async Task<BaseResponse> DeleteProduct(int id)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

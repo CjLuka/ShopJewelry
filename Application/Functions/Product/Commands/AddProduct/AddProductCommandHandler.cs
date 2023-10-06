@@ -15,11 +15,13 @@ namespace Application.Functions.Product.Commands.AddProduct
     {
         private readonly IMapper _mapper;
         private readonly IProductRepository _productRepository;
+        private readonly IProductCategoryRepository _productCategoryRepository;
 
-        public AddProductCommandHandler(IMapper mapper, IProductRepository productRepository) 
+        public AddProductCommandHandler(IMapper mapper, IProductRepository productRepository, IProductCategoryRepository productCategoryRepository) 
         {
             _mapper = mapper;
             _productRepository = productRepository;
+            _productCategoryRepository = productCategoryRepository;
         }
 
         public async Task<BaseResponse> Handle(AddProductCommand request, CancellationToken cancellationToken)
@@ -35,9 +37,14 @@ namespace Application.Functions.Product.Commands.AddProduct
             var product = _mapper.Map<Domain.Entites.Product>(request);
 
             product.CreatedBy = "Test";
-            product.CreatedDate = new DateTime(2023, 10, 03);
-            product.LastModifiedBy = "Test";
-            product.LastModifiedDate = new DateTime(2023, 10, 03);
+            product.CreatedDate = DateTime.Now;
+
+            var category = await _productCategoryRepository.GetByIdAsync(request.ProductCategoryId);
+            if (category == null)
+            {
+                return new BaseResponse(false, "Kategoria o podanym Id nie istnieje");
+            }
+            //wyszukanie kategorii po Id i ewentualna zwrotka, ze takie idCategory nie istnieje TODO
 
             var addProduct = await _productRepository.AddAsync(product);
 

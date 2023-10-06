@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistance.Data;
 
@@ -11,9 +12,11 @@ using Persistance.Data;
 namespace Persistance.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    partial class ShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231005091203_Allow null in LastModified")]
+    partial class AllownullinLastModified
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -198,23 +201,6 @@ namespace Persistance.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("19e3d4bf-37f2-4ed6-8ae3-8c6eae9920be"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "9ff62f67-66ca-4b14-a6ba-ebb702622f55",
-                            Email = "luka@o2.pl",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "LUKA@O2.PL",
-                            NormalizedUserName = "LUKA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMOj0BePleN5IlkgzyoLWmO4Y0IWuTMHyn0R8t3YDMkGgxGKE98TC51HNGOIZ4PsFQ==",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "Luka"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -243,22 +229,6 @@ namespace Persistance.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("f27601ac-d6e3-43a7-ad7d-acf5bfc41b7b"),
-                            ConcurrencyStamp = "f27601ac-d6e3-43a7-ad7d-acf5bfc41b7b",
-                            Name = "User",
-                            NormalizedName = "User"
-                        },
-                        new
-                        {
-                            Id = new Guid("96ae491d-ab67-489c-ab00-8eb57d05f11a"),
-                            ConcurrencyStamp = "96ae491d-ab67-489c-ab00-8eb57d05f11a",
-                            Name = "Admin",
-                            NormalizedName = "Admin"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -343,18 +313,6 @@ namespace Persistance.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = new Guid("19e3d4bf-37f2-4ed6-8ae3-8c6eae9920be"),
-                            RoleId = new Guid("f27601ac-d6e3-43a7-ad7d-acf5bfc41b7b")
-                        },
-                        new
-                        {
-                            UserId = new Guid("19e3d4bf-37f2-4ed6-8ae3-8c6eae9920be"),
-                            RoleId = new Guid("96ae491d-ab67-489c-ab00-8eb57d05f11a")
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>

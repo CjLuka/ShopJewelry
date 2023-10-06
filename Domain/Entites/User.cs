@@ -11,6 +11,6 @@ namespace Domain.Entites
 {
     public class User : IdentityUser<Guid>
     {
-        public string Email { get; set; }
+
     }
 }
