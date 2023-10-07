@@ -10,5 +10,6 @@ namespace Application.Contracts.Persistance
     public interface IProductRepository : IAsyncRepository<Product>
     {
         //Task <List<Product>> GetProductsAsync ();
+        Task<List<Product>> GetByCategoryAsync(int categoryId);
     }
 }

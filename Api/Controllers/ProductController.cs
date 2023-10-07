@@ -1,5 +1,6 @@
 ﻿using Application.Functions.Product.Commands.AddProduct;
 using Application.Functions.Product.Queries.GetAllProducts;
+using Application.Functions.Product.Queries.GetByCategory;
 using Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -24,6 +25,13 @@ namespace Api.Controllers
         public async Task<BaseResponse<List<GetAllProductsDto>>> GetAllProducts()
         {
             return await _mediator.Send(new GetAllProductsQuery());
+        }
+
+        [HttpGet]
+        [Route("ProductByCategory/{id}")]
+        public async Task<BaseResponse<List<GetByCategoryDto>>> GetByCategory(int categoryId)
+        {
+            return await _mediator.Send(new GetByCategoryQuery() { CategoryId = categoryId});
         }
 
         [Authorize(Roles ="Admin")]

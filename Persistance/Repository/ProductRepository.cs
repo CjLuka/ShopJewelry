@@ -16,17 +16,23 @@ namespace Persistance.Repository
         {
             
         }
+
+        //pobranie wszystkich produktów
         new public async Task<List<Product>?> GetAll()
         {
             return await _shopDbContext.Products
                 .Include(p => p.ProductCategory)
                 .ToListAsync();
         }
-        //public async Task<List<Product>> GetProductsAsync()
-        //{
-        //    return await _shopDbContext.Products
-        //        .Include(p => p.ProductCategory)
-        //        .ToListAsync();
-        //}
+
+        //pobranie wszystkich produktów po kategorii
+        public async Task<List<Product>> GetByCategoryAsync(int categoryId)
+        {
+            return await _shopDbContext.Products
+                .Include(p => p.ProductCategory)
+                .Where(x => x.ProductCategoryId== categoryId)
+                .ToListAsync();
+        }
+
     }
 }
